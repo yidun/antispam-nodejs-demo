@@ -17,12 +17,10 @@ var protocol=urlObj.protocol;
 var host=urlObj.hostname;
 var path=urlObj.path;
 var port=urlObj.port;
-if(protocol=="http:"){
-	http=require('http');
-}else if(protocol=="https:"){
+if(protocol=="https:"){
 	http=require('https');
 }else{
-	console.log("ERROR:portocol parse error!");
+	console.log("ERROR:portocol parse error, and portocol must be https !");
 	return;
 }
 
@@ -42,7 +40,7 @@ var noncer=function(){
 }
 
 //生成签名算法--工具方法
-var genSignature=function(secretKey,paramsJson,md5er){
+var genSignature=function(secretKey,paramsJson){
 	var sorter=function(paramsJson){
 		var sortedJson={};
 		var sortedKeys=Object.keys(paramsJson).sort();
@@ -71,7 +69,7 @@ var post_data = {
 	timestamp:new Date().getTime(),
 	nonce:noncer()
 };
-var signature=genSignature(secretKey,post_data,md5er);
+var signature=genSignature(secretKey,post_data);
 post_data.signature=signature;
 var content = querystring.stringify(post_data,null,null,null);
 var options = {
