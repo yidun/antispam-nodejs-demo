@@ -4,25 +4,23 @@ var querystring = require('querystring');
 var crypto = require('crypto');
 var md5er = crypto.createHash('md5');//MD5加密工具
 
-// 产品密钥ID，产品标识 
+//产品密钥ID，产品标识 
 var secretId="your_secret_id";
 // 产品私有密钥，服务端生成签名信息使用，请严格保管，避免泄露 
 var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配 
 var businessId="your_business_id";
 // 易盾反垃圾云服务文本在线检测接口地址 
-var apiurl="https://api.aq.163.com/v2/text/check";
+var apiurl="https://api.aq.163.com/v2/text/callback/results";
 var urlObj=urlutil.parse(apiurl);
 var protocol=urlObj.protocol;
 var host=urlObj.hostname;
 var path=urlObj.path;
 var port=urlObj.port;
-if(protocol=="http:"){
-	http=require('http');
-}else if(protocol=="https:"){
+if(protocol=="https:"){
 	http=require('https');
 }else{
-	console.log("ERROR:portocol parse error!");
+	console.log("ERROR:portocol parse error, and portocol must be https !");
 	return;
 }
 //产生随机整数--工具方法
@@ -41,7 +39,7 @@ var noncer=function(){
 }
 
 //生成签名算法--工具方法
-var genSignature=function(secretKey,paramsJson,md5er){
+var genSignature=function(secretKey,paramsJson){
 	var sorter=function(paramsJson){
 		var sortedJson={};
 		var sortedKeys=Object.keys(paramsJson).sort();
@@ -85,7 +83,7 @@ var post_data = {
 	callback:"ebfcad1c-dba1-490c-b4de-e784c2691768",
 	publishTime:new Date().getTime()
 };
-var signature=genSignature(secretKey,post_data,md5er);
+var signature=genSignature(secretKey,post_data);
 post_data.signature=signature;
 var content = querystring.stringify(post_data,null,null,null);
 var options = {
