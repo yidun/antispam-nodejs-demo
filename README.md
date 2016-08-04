@@ -14,5 +14,8 @@ http://dun.163.com
 ├── textCheckDemo.js 文本在线检测接口演示
 ├── textCallbakDemo.js　文本离线结果获取接口演示
 ├── imageCheckDemo.js　图片在线检测接口演示
-└── imageCallbackDemo.js 图片离线结果获取接口演示
+├── imageCallbackDemo.js 图片离线结果获取接口演示
+├── liveVideoSubmitDemo.js 直播流信息提交接口演示
+└── liveVideoCallbackDemo.js 直播流检测结果获取接口演示
+
 ```
