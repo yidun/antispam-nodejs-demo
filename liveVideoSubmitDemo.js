@@ -1,4 +1,4 @@
-﻿var http = null;
+﻿var http = require('https');
 var urlutil=require('url');
 var querystring = require('querystring');
 var crypto = require('crypto');
@@ -13,16 +13,10 @@ var businessId="your_business_id";
 // 易盾反垃圾云服务直播流信息提交接口地址 
 var apiurl="https://api.aq.163.com/v2/livevideo/submit";
 var urlObj=urlutil.parse(apiurl);
-var protocol=urlObj.protocol;
 var host=urlObj.hostname;
 var path=urlObj.path;
 var port=urlObj.port;
-if(protocol=="https:"){
-	http=require('https');
-}else{
-	console.log("ERROR:portocol parse error, and portocol must be https !");
-	return;
-}
+
 //产生随机整数--工具方法
 var noncer=function(){
 	var range=function(start,end){
