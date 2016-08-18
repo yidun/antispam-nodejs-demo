@@ -64,7 +64,8 @@ var post_data = {
 	// 2.设置私有参数
 	dataId:"myid",
 	url:"www.xxxx.com/xxx",
-	callback:"mycallback"
+	callback:"mycallback",
+	scFrequency:5
 };
 var signature=genSignature(secretKey,post_data);
 post_data.signature=signature;

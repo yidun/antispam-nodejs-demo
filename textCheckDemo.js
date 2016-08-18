@@ -65,6 +65,7 @@ var post_data = {
 	dataId:"ebfcad1c-dba1-490c-b4de-e784c2691768",
 	content:"测试内容",
 	dataOpType:"1",
+	dataType:"1",
 	ip:"123.115.77.137",
 	account:"nodejs@163.com",
 	deviceType:"4",
