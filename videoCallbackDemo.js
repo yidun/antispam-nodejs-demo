@@ -32,6 +32,11 @@ var responseCallback=function(responseData){
 		}else{
 			for(var i=0;i<result.length;i++){
 				var obj=result[i];
+				var status = obj.status;
+				if(status != 0){//异常，异常码定义见官网文档
+					console.log("视频异常，status="+status);
+					continue;
+				}
 				var videoLevel=obj.level;
 				var callback=obj.callback;
 				if(videoLevel==0){
