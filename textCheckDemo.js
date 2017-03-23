@@ -18,7 +18,6 @@ var post_data = {
 	// 2.设置私有参数
 	dataId:"ebfcad1c-dba1-490c-b4de-e784c2691768",
 	content:"易盾测试内容！",
-	dataOpType:"1",
 	ip:"123.115.77.137",
 	dataType:"1",
 	account:"nodejs@163.com",
