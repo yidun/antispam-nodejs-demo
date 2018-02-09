@@ -12,7 +12,7 @@ var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
 	businessId:businessId,
-	version:"v3",
+	version:"v3.1",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer(),
 	// 2.设置私有参数
