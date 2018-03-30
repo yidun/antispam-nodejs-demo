@@ -12,7 +12,7 @@ var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
 	businessId:businessId,
-	version:"v3.1",
+	version:"v3.2",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer(),
 	// 2.1设置私有参数
@@ -43,8 +43,9 @@ var responseCallback=function(responseData){
 				var obj=result[i];
 				var name=obj.name;
 				var taskId=obj.taskId;
+			    var status=obj.status;
 				var labelsArray=obj.labels;
-				console.log("taskId="+taskId+"，name="+name+"，labels：");
+				console.log("taskId="+taskId+"，status="+status+"，name="+name+"，labels：");
 				var  maxLevel = -1;
                 // 产品需根据自身需求，自行解析处理，本示例只是简单判断分类级别
 				for(var k=0;k<labelsArray.length;k++){
