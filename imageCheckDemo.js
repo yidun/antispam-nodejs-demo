@@ -14,10 +14,10 @@ var post_data = {
 	businessId:businessId,
 	version:"v3.2",
 	timestamp:new Date().getTime(),
-	nonce:utils.noncer(),
+	nonce:utils.noncer()
 	// 2.1设置私有参数
-	account:"nodejs@163.com",
-	ip:"123.115.77.137"
+	// account:"nodejs@163.com",
+	// ip:"123.115.77.137"
 };
 // 2.2请求图片参数
 var images=[{

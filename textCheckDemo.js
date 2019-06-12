@@ -17,14 +17,14 @@ var post_data = {
 	nonce:utils.noncer(),
 	// 2.设置私有参数
 	dataId:"ebfcad1c-dba1-490c-b4de-e784c2691768",
-	content:"易盾测试内容！",
-	ip:"123.115.77.137",
-	dataType:"1",
-	account:"nodejs@163.com",
-	deviceType:"4",
-	deviceId:"92B1E5AA-4C3D-4565-A8C2-86E297055088",
-	callback:"ebfcad1c-dba1-490c-b4de-e784c2691768",
-	publishTime:new Date().getTime()
+	content:"易盾测试内容！"
+	// ip:"123.115.77.137",
+    // dataType:"1",
+    // account:"nodejs@163.com",
+    // deviceType:"4",
+    // deviceId:"92B1E5AA-4C3D-4565-A8C2-86E297055088",
+    // callback:"ebfcad1c-dba1-490c-b4de-e784c2691768",
+    // publishTime:new Date().getTime()
 };
 var signature=utils.genSignature(secretKey,post_data);
 post_data.signature=signature;
