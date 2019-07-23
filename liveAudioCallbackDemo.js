@@ -5,14 +5,15 @@ var secretId="your_secret_id";
 var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配 
 var businessId="your_business_id";
-// 易盾反垃圾云服务文本检测结果获取接口地址
-var apiurl="https://as.dun.163yun.com/v3/text/callback/results";
+// 易盾反垃圾云服务直播音频离线结果获取接口地址
+var apiurl="https://as-liveaudio.dun.163yun.com/v1/liveaudio/callback/results";
+
 //请求参数
 var post_data = {
-	// 设置公有有参数
+	// 1.设置公有有参数
 	secretId:secretId,
 	businessId:businessId,
-	version:"v3.1",
+	version:"v1",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer()
 };
@@ -20,25 +21,25 @@ var signature=utils.genSignature(secretKey,post_data);
 post_data.signature=signature;
 //http请求结果
 var responseCallback=function(responseData){
+	console.log(responseData);
 	var data = JSON.parse(responseData);
 	var code=data.code;
 	var msg=data.msg;
 	if(code==200){
 		var result=data.result;
 		if(result.length==0){
-			console.log("暂时没有人工复审结果需要获取，请稍后重试！");
+			console.log("无数据");
 		}else{
 			for(var i=0;i<result.length;i++){
 				var obj=result[i];
-				var action=obj.action;
-				var taskId=obj.taskId;
-				var callback=obj.callback;
-				var labels=obj.labels;
-				if(action==0){// 内容确认没问题，通过
-					console.log("taskId="+taskId+"，callback="+callback+"，文本人工复审结果：通过")
-				}else if(action==2){// 内容非法，不通过，需删除
-					console.log("taskId="+taskId+"，callback="+callback+"，文本人工复审结果：不通过，分类信息如下："+JSON.stringify(labels))
-				}
+				var action = obj.action;
+                var taskId = obj.taskId;
+                var segments = obj.segments;
+                if (action == 0) {
+                    console.log("结果：通过!taskId="+taskId);
+                } else if (action == 2) {
+                    console.log("结果：不通过!taskId="+taskId);
+                }
 			}
 		}
 	}else{

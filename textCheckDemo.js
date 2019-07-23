@@ -6,7 +6,7 @@ var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配 
 var businessId="your_business_id";
 // 易盾反垃圾云服务文本在线检测接口地址 
-var apiurl="https://api.aq.163.com/v3/text/check";
+var apiurl="https://as.dun.163yun.com/v3/text/check";
 //请求参数
 var post_data = {
 	// 1.设置公有有参数
@@ -17,14 +17,14 @@ var post_data = {
 	nonce:utils.noncer(),
 	// 2.设置私有参数
 	dataId:"ebfcad1c-dba1-490c-b4de-e784c2691768",
-	content:"易盾测试内容！",
-	ip:"123.115.77.137",
-	dataType:"1",
-	account:"nodejs@163.com",
-	deviceType:"4",
-	deviceId:"92B1E5AA-4C3D-4565-A8C2-86E297055088",
-	callback:"ebfcad1c-dba1-490c-b4de-e784c2691768",
-	publishTime:new Date().getTime()
+	content:"易盾测试内容！"
+	// ip:"123.115.77.137",
+    // dataType:"1",
+    // account:"nodejs@163.com",
+    // deviceType:"4",
+    // deviceId:"92B1E5AA-4C3D-4565-A8C2-86E297055088",
+    // callback:"ebfcad1c-dba1-490c-b4de-e784c2691768",
+    // publishTime:new Date().getTime()
 };
 var signature=utils.genSignature(secretKey,post_data);
 post_data.signature=signature;

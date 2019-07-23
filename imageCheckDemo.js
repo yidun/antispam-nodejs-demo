@@ -6,24 +6,24 @@ var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配 
 var businessId="your_business_id";
 // 易盾反垃圾云服务图片在线检测接口地址 
-var apiurl="https://api.aq.163.com/v3/image/check";
+var apiurl="https://as.dun.163yun.com/v3/image/check";
 //请求参数
 var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
 	businessId:businessId,
-	version:"v3.1",
+	version:"v3.2",
 	timestamp:new Date().getTime(),
-	nonce:utils.noncer(),
+	nonce:utils.noncer()
 	// 2.1设置私有参数
-	account:"nodejs@163.com",
-	ip:"123.115.77.137"
+	// account:"nodejs@163.com",
+	// ip:"123.115.77.137"
 };
 // 2.2请求图片参数
 var images=[{
-		name:"http://p1.music.126.net/lEQvXzoC17AFKa6yrf-ldA==/1412872446212751.jpg",
+		name:"http://nos.netease.com/yidun/2-0-0-4038669695e344a4addc546f772e90a5.jpg",
 		type:1,
-		data:"http://p1.music.126.net/lEQvXzoC17AFKa6yrf-ldA==/1412872446212751.jpg"
+		data:"http://nos.netease.com/yidun/2-0-0-4038669695e344a4addc546f772e90a5.jpg"
 	},{
 		name:"{\"imageId\": 33451123, \"contentId\": 78978}",
 		type:2,
@@ -43,8 +43,9 @@ var responseCallback=function(responseData){
 				var obj=result[i];
 				var name=obj.name;
 				var taskId=obj.taskId;
+			    var status=obj.status;
 				var labelsArray=obj.labels;
-				console.log("taskId="+taskId+"，name="+name+"，labels：");
+				console.log("taskId="+taskId+"，status="+status+"，name="+name+"，labels：");
 				var  maxLevel = -1;
                 // 产品需根据自身需求，自行解析处理，本示例只是简单判断分类级别
 				for(var k=0;k<labelsArray.length;k++){
