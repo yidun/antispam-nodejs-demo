@@ -6,24 +6,24 @@ var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配 
 var businessId="your_business_id";
 // 易盾反垃圾云服务图片在线检测接口地址 
-var apiurl="https://as.dun.163yun.com/v3/image/check";
+var apiurl="https://as.dun.163yun.com/v4/image/check";
 //请求参数
 var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
 	businessId:businessId,
-	version:"v3.2",
+	version:"v4",
 	timestamp:new Date().getTime(),
-	nonce:utils.noncer(),
+	nonce:utils.noncer()
 	// 2.1设置私有参数
-	account:"nodejs@163.com",
-	ip:"123.115.77.137"
+	// account:"nodejs@163.com",
+	// ip:"123.115.77.137"
 };
 // 2.2请求图片参数
 var images=[{
-		name:"http://nos.netease.com/yidun/2-0-0-4038669695e344a4addc546f772e90a5.jpg",
+		name:"https://nos.netease.com/yidun/2-0-0-a6133509763d4d6eac881a58f1791976.jpg",
 		type:1,
-		data:"http://nos.netease.com/yidun/2-0-0-4038669695e344a4addc546f772e90a5.jpg"
+		data:"https://nos.netease.com/yidun/2-0-0-a6133509763d4d6eac881a58f1791976.jpg"
 	},{
 		name:"{\"imageId\": 33451123, \"contentId\": 78978}",
 		type:2,
@@ -38,38 +38,56 @@ var responseCallback=function(responseData){
 	var code=data.code;
 	var msg=data.msg;
 	if(code==200){
-		var result=data.result;
-		for(var i=0;i<result.length;i++){
-				var obj=result[i];
-				var name=obj.name;
-				var taskId=obj.taskId;
-			    var status=obj.status;
-				var labelsArray=obj.labels;
-				console.log("taskId="+taskId+"，status="+status+"，name="+name+"，labels：");
-				var  maxLevel = -1;
-                // 产品需根据自身需求，自行解析处理，本示例只是简单判断分类级别
-				for(var k=0;k<labelsArray.length;k++){
-					var labelObj=labelsArray[k];
-					var label=labelObj.label;
-					var level=labelObj.level;
-					var rate=labelObj.rate;
-					console.log("lable:"+label+",level:"+level+",rate:"+rate);
-					maxLevel = level > maxLevel ? level : maxLevel;
-				}
-			 	switch (maxLevel) {
-                        case 0:
-                            console.log("#图片机器检测结果：最高等级为\"正常\"\n");
-                            break;
-                        case 1:
-                            console.log("#图片机器检测结果：最高等级为\"嫌疑\"\n");
-                            break;
-                        case 2:
-                            console.log("#图片机器检测结果：最高等级为\"确定\"\n");
-                            break;
-                        default:
-                            break;
-                }
+		// 反垃圾检测结果
+		var antispamArray=data.antispam;
+		for(var i=0;i<antispamArray.length;i++){
+			var obj=antispamArray[i];
+			var name=obj.name;
+			var taskId=obj.taskId;
+			var status=obj.status;
+			var action=obj.action;
+			var labelsArray=obj.labels;
+			console.log("taskId="+taskId+"，status="+status+"，name="+name+"，action="+action);
+			// 产品需根据自身需求，自行解析处理，本示例只是简单判断分类级别
+			for(var k=0;k<labelsArray.length;k++){
+				var labelObj=labelsArray[k];
+				var label=labelObj.label;
+				var level=labelObj.level;
+				var rate=labelObj.rate;
+				// subLabels这二级分类数组，根据需要解析
+				var subLabels=labelObj.subLabels;
+				console.log("lable:"+label+",level:"+level+",rate:"+rate);
+			}
+			switch (action) {
+					case 0:
+						console.log("#图片机器检测结果：最高等级为\"正常\"\n");
+						break;
+					case 1:
+						console.log("#图片机器检测结果：最高等级为\"嫌疑\"\n");
+						break;
+					case 2:
+						console.log("#图片机器检测结果：最高等级为\"确定\"\n");
+						break;
+					default:
+						break;
+			}
 		}
+		// ocr结果
+        var ocrArray=data.ocr;
+        for(var i=0;i<ocrArray.length;i++){
+            var obj=ocrArray[i];
+            var name=obj.name;
+            var taskId=obj.taskId;
+            var detailsArray=obj.details;
+            console.log("taskId="+taskId+"，name="+name);
+            for(var k=0;k<detailsArray.length;k++){
+                var detail=detailsArray[k];
+                var content=detail.content;
+                // lineContents为ocr片段及坐标信息，根据需要解析
+                var lineContents=detail.lineContents;
+                console.log("识别ocr文本内容:"+content);
+            }
+        }
 	}else{
 		 console.log('ERROR:code=' + code+',msg='+msg);
 	}

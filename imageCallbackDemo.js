@@ -6,13 +6,13 @@ var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配 
 var businessId="your_business_id";
 // 易盾反垃圾云服务图片检测结果获取接口地址
-var apiurl="https://as.dun.163yun.com/v3/image/callback/results";
+var apiurl="https://as.dun.163yun.com/v4/image/callback/results";
 //请求参数
 var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
 	businessId:businessId,
-	version:"v3.1",
+	version:"v4",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer()
 }
@@ -24,7 +24,7 @@ var responseCallback=function(responseData){
 		var code=data.code;
 		var msg=data.msg;
 		if(code==200){
-			var result=data.result;
+			var result=data.antispam;
 			if(result.length==0){
 				console.log("暂时没有人工复审结果需要获取，请稍后重试！");
 			}else{
@@ -33,8 +33,8 @@ var responseCallback=function(responseData){
 					var name=obj.name;
 					var taskId=obj.taskId;
 					var labelsArray=obj.labels;
-					console.log("taskId="+taskId+"，name="+name+"，labels：");
-					var  maxLevel = -1;
+                    var action=obj.action;
+					console.log("taskId="+taskId+"，name="+name+"，action="+action);
 	                // 产品需根据自身需求，自行解析处理，本示例只是简单判断分类级别
 					for(var k=0;k<labelsArray.length;k++){
 						var labelObj=labelsArray[k];
@@ -42,17 +42,16 @@ var responseCallback=function(responseData){
 						var level=labelObj.level;
 						var rate=labelObj.rate;
 						console.log("lable:"+label+",level:"+level+",rate:"+rate);
-						maxLevel = level > maxLevel ? level : maxLevel;
 					}
-				 	switch (maxLevel) {
-	                        case 0:
-	                            console.log("#图片人工复审结果：最高等级为\"正常\"\n");
-	                            break;
-	                        case 2:
-	                            console.log("#图片人工复审结果：最高等级为\"确定\"\n");
-	                            break;
-	                        default:
-	                            break;
+				 	switch (action) {
+						case 0:
+							console.log("#图片人工复审结果：最高等级为\"正常\"\n");
+							break;
+						case 2:
+							console.log("#图片人工复审结果：最高等级为\"确定\"\n");
+							break;
+						default:
+							break;
 	                }
 					
 				}
