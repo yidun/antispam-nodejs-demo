@@ -12,7 +12,7 @@ var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
 	businessId:businessId,
-	version:"v1",
+	version:"v1.1",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer(),
 	// 2.设置私有参数
@@ -30,9 +30,9 @@ var responseCallback=function(responseData){
         var status=result.status;
         var taskId=result.taskId;
         if (status == 0) {
-            console.log("推送成功!taskId="+taskId);
+            console.log("SUBMIT SUCCESS!taskId="+taskId);
         } else {
-            console.log("推送失败!taskId="+taskId);
+            console.log("SUBMIT FAIL!taskId="+taskId);
         }
 	}else{
 		 console.log('ERROR:code=' + code+',msg='+msg);
