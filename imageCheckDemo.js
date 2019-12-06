@@ -45,31 +45,35 @@ var responseCallback=function(responseData){
 			var name=obj.name;
 			var taskId=obj.taskId;
 			var status=obj.status;
-			var action=obj.action;
 			var labelsArray=obj.labels;
-			console.log("taskId="+taskId+"，status="+status+"，name="+name+"，action="+action);
-			// 产品需根据自身需求，自行解析处理，本示例只是简单判断分类级别
-			for(var k=0;k<labelsArray.length;k++){
-				var labelObj=labelsArray[k];
-				var label=labelObj.label;
-				var level=labelObj.level;
-				var rate=labelObj.rate;
-				// subLabels这二级分类数组，根据需要解析
-				var subLabels=labelObj.subLabels;
-				console.log("lable:"+label+",level:"+level+",rate:"+rate);
-			}
-			switch (action) {
-					case 0:
-						console.log("#图片机器检测结果：最高等级为\"正常\"\n");
-						break;
-					case 1:
-						console.log("#图片机器检测结果：最高等级为\"嫌疑\"\n");
-						break;
-					case 2:
-						console.log("#图片机器检测结果：最高等级为\"确定\"\n");
-						break;
-					default:
-						break;
+			if(status==0){
+                var action=obj.action;
+                console.log("taskId="+taskId+"，status="+status+"，name="+name+"，action="+action);
+                // 产品需根据自身需求，自行解析处理，本示例只是简单判断分类级别
+                for(var k=0;k<labelsArray.length;k++){
+                    var labelObj=labelsArray[k];
+                    var label=labelObj.label;
+                    var level=labelObj.level;
+                    var rate=labelObj.rate;
+                    // subLabels这二级分类数组，根据需要解析
+                    var subLabels=labelObj.subLabels;
+                    console.log("lable:"+label+",level:"+level+",rate:"+rate);
+                }
+                switch (action) {
+                    case 0:
+                        console.log("#图片机器检测结果：最高等级为\"正常\"\n");
+                        break;
+                    case 1:
+                        console.log("#图片机器检测结果：最高等级为\"嫌疑\"\n");
+                        break;
+                    case 2:
+                        console.log("#图片机器检测结果：最高等级为\"确定\"\n");
+                        break;
+                    default:
+                        break;
+                }
+			}else{
+                console.log("检测失败");
 			}
 		}
 		// ocr结果

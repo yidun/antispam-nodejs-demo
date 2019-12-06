@@ -3,14 +3,14 @@
 var secretId="your_secret_id";
 // 产品私有密钥，服务端生成签名信息使用，请严格保管，避免泄露 
 var secretKey="your_secret_key";
-// 易盾反垃圾云服务文档解决方案离线结果获取接口地址
-var apiurl="https://as-file.dun.163yun.com/v1/file/callback/results";
+// 易盾反垃圾云服务点播音视频解决方案离线结果获取接口地址
+var apiurl="https://as.dun.163yun.com/v1/livewallsolution/callback/results";
 
 //请求参数
 var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
-	version:"v1.1",
+	version:"v1",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer()
 };
@@ -29,10 +29,10 @@ var responseCallback=function(responseData){
 		}else{
 			for(var i=0;i<result.length;i++){
 				var obj=result[i];
-				var dataId=obj.dataId;
-				var taskId=obj.taskId;
-                var result=obj.result;
-                console.log("SUCCESS:dataId="+dataId+",taskId="+taskId+",result="+result);
+                var taskId = obj.taskId;
+                var action = obj.action;
+                var label = obj.label;
+                console.log("taskId="+taskId+",action="+action+",label="+label);
 			}
 		}
 	}else{

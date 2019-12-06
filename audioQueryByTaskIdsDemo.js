@@ -17,6 +17,8 @@ var post_data = {
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer()
 };
+var taskIds=["ecac3bc976674c36bfc5c06445243306"];
+post_data.taskIds=JSON.stringify(taskIds);
 var signature=utils.genSignature(secretKey,post_data);
 post_data.signature=signature;
 //http请求结果
@@ -47,8 +49,6 @@ var responseCallback=function(responseData){
                     		var labelInfo=labels[j];
                     		var label=labelInfo.label;
                     		var level=labelInfo.level;
-                    		var details=labelInfo.details;
-                    		var hintArray=details.hint;
                 		}*/
                         console.log("结果："+action==1?"不确定":"不通过"+"!taskId="+taskId);
 					}

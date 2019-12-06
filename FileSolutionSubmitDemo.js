@@ -9,13 +9,12 @@ var apiurl = 'https://as-file.dun.163yun.com/v1/file/submit'
 var post_data = {
   // 1.设置公有有参数
   secretId: secretId,
-  version: 'v1',
+  version: 'v1.1',
   timestamp: new Date().getTime(),
   nonce: utils.noncer(),
   // 2.设置私有参数
   dataId: 'fbfcad1c-dba1-490c-b4d111e784c2691765',
   url: 'http://xxx.xxx.com/xxxx'
-  // dataType: '1',
   // account: 'java@163.com',
   // ip: '123.115.77.137',
   // checkFlag: '3',
@@ -31,9 +30,10 @@ var responseCallback = function (responseData) {
   var code = data.code
   var msg = data.msg
   if (code == 200) {
-    var obj = data.result
-    var dataId = obj.dataId
-    var taskId = obj.taskId
+    var obj = data.result;
+    var dataId = obj.dataId;
+    var taskId = obj.taskId;
+    console.log('SUBMIT SUCCESS:taskId=' + taskId + ',dataId=' + dataId)
   } else {
     console.log('ERROR:code=' + code + ',msg=' + msg)
   }

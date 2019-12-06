@@ -47,8 +47,6 @@ var responseCallback=function(responseData){
                     		var labelInfo=labels[j];
                     		var label=labelInfo.label;
                     		var level=labelInfo.level;
-                    		var details=labelInfo.details;
-                    		var hintArray=details.hint;
                 		}*/
                         console.log("结果："+action==1?"不确定":"不通过"+"!taskId="+taskId);
 					}
