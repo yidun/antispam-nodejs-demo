@@ -26,22 +26,33 @@ var responseCallback=function(responseData){
 	var code=data.code;
 	var msg=data.msg;
 	if(code==200){
-		var result=data.result;
-		if(result.length==0){
-			console.log("无数据");
-		}else{
-			for(var i=0;i<result.length;i++){
-				var obj=result[i];
-				var action = obj.action;
+        var result=data.result;
+        if(result.length==0){
+            console.log("暂时没有结果需要获取，请稍后重试！");
+        }else{
+            for(var i=0;i<result.length;i++){
+                var obj=result[i];
                 var taskId = obj.taskId;
-                var segments = obj.segments;
-                if (action == 0) {
-                    console.log("结果：通过!taskId="+taskId);
-                } else if (action == 2) {
-                    console.log("结果：不通过!taskId="+taskId);
+                var asrStatus = obj.asrStatus;
+                if(asrStatus==4){
+                    var asrResult = obj.asrResult;
+                    console.log("检测失败:taskId="+taskId+",asrResult="+asrResult);
+                }else{
+                    var action = obj.action;
+                    var segments = obj.segments;
+                    if(action==0){
+                        console.log("通过:taskId="+taskId);
+                    }else if(action==1||action==2){
+                        /*for(var j=0;j<segments.length;j++){
+                    		var segment=segments[j];
+                    		var label=segment.label;
+                    		var level=segment.level;
+                		}*/
+                        console.log("结果："+action==1?"不确定":"不通过"+"!taskId="+taskId);
+                    }
                 }
-			}
-		}
+            }
+        }
 	}else{
 		 console.log('ERROR:code=' + code+',msg='+msg);
 	}

@@ -6,17 +6,19 @@ var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配
 var businessId="your_business_id";
 // 易盾反垃圾云服务音频离线结果获取接口地址
-var apiurl="https://as.dun.163yun.com/v3/audio/callback/results";
+var apiurl="https://as.dun.163yun.com/v1/audio/query/task";
 
 //请求参数
 var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
 	businessId:businessId,
-	version:"v3.1",
+	version:"v1",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer()
 };
+var taskIds=["ecac3bc976674c36bfc5c06445243306"];
+post_data.taskIds=JSON.stringify(taskIds);
 var signature=utils.genSignature(secretKey,post_data);
 post_data.signature=signature;
 //http请求结果
@@ -26,7 +28,7 @@ var responseCallback=function(responseData){
 	var code=data.code;
 	var msg=data.msg;
 	if(code==200){
-		var result=data.antispam;
+		var result=data.result;
 		if(result.length==0){
 			console.log("暂时没有结果需要获取，请稍后重试！");
 		}else{
