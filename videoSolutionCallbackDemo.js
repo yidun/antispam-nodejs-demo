@@ -29,7 +29,9 @@ var responseCallback=function(responseData){
 		}else{
 			for(var i=0;i<result.length;i++){
 				var obj=result[i];
-                console.log("obj="+obj);
+                var taskId = obj.taskId;
+                var result = obj.result;
+                console.log("taskId="+taskId+",result="+result);
 			}
 		}
 	}else{

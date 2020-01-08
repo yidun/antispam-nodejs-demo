@@ -7,13 +7,13 @@ var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配 
 var businessId="your_business_id";
 // 易盾反垃圾云服务直播流信息提交接口地址 
-var apiurl="https://as.dun.163yun.com/v2/livevideo/submit";
+var apiurl="https://as.dun.163yun.com/v3/livevideo/submit";
 //请求参数
 var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
 	businessId:businessId,
-	version:"v2",
+	version:"v3",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer(),
 	// 2.设置私有参数
@@ -31,8 +31,10 @@ var responseCallback=function(responseData){
 	var msg=data.msg;
 	if(code==200){
 		var result=data.result;
-		if(result){
-			console.log("推送成功");
+        var status=result.status;
+        var taskId=result.taskId;
+		if(status==0){
+			console.log("推送成功,taskId="+taskId);
 		}else{
 			console.log("推送失败");
 		}

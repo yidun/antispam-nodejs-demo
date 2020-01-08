@@ -4,7 +4,7 @@
  * 2：genSignature 生成Md5签名
  * 3:sendHttpRequest 发送http请求
  */
-var http = require('https');
+var http = require('http');
 var urlutil=require('url');
 var querystring = require('querystring');
 var crypto = require('crypto');

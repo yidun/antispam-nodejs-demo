@@ -10,7 +10,7 @@ var apiurl="https://as-file.dun.163yun.com/v1/file/callback/results";
 var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
-	version:"v1",
+	version:"v1.1",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer()
 };
@@ -29,7 +29,10 @@ var responseCallback=function(responseData){
 		}else{
 			for(var i=0;i<result.length;i++){
 				var obj=result[i];
-                console.log("obj="+obj);
+				var dataId=obj.dataId;
+				var taskId=obj.taskId;
+                var result=obj.result;
+                console.log("SUCCESS:dataId="+dataId+",taskId="+taskId+",result="+result);
 			}
 		}
 	}else{

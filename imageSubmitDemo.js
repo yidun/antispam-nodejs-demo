@@ -5,19 +5,23 @@ var secretId="your_secret_id";
 var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配 
 var businessId="your_business_id";
-// 易盾反垃圾云服务直播音频信息提交接口地址
-var apiurl="https://as-liveaudio.dun.163yun.com/v1/liveaudio/check";
+// 易盾反垃圾云服务图片数据提交接口地址
+var apiurl="https://as.dun.163yun.com/v1/image/submit";
 //请求参数
 var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
 	businessId:businessId,
-	version:"v1.1",
+	version:"v1",
 	timestamp:new Date().getTime(),
-	nonce:utils.noncer(),
-	// 2.设置私有参数
-	url:"www.xxxx.com/xxx"
+	nonce:utils.noncer()
 };
+var images=[{
+    name:"image1",
+    data:"https://nos.netease.com/yidun/2-0-0-a6133509763d4d6eac881a58f1791976.jpg",
+    level:2
+}];
+post_data.images=JSON.stringify(images);
 var signature=utils.genSignature(secretKey,post_data);
 post_data.signature=signature;
 //http请求结果
@@ -26,17 +30,14 @@ var responseCallback=function(responseData){
 	var code=data.code;
 	var msg=data.msg;
 	if(code==200){
-        var result=data.result;
-        var status=result.status;
-        var taskId=result.taskId;
-        if (status == 0) {
-            console.log("SUBMIT SUCCESS!taskId="+taskId);
-        } else {
-            console.log("SUBMIT FAIL!taskId="+taskId);
-        }
+		var result=data.result;
+		for(var i=0;i<result.length;i++){
+			var name=result[i].name;
+            var taskId=result[i].taskId;
+            console.log("图片提交返回,taskId="+taskId+",name："+name)
+		}
 	}else{
 		 console.log('ERROR:code=' + code+',msg='+msg);
 	}
-   
 }
 utils.sendHttpRequest(apiurl,"POST",post_data,responseCallback);
