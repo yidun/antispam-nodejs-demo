@@ -40,15 +40,17 @@ var responseCallback=function(responseData){
                 }else{
                     var action = obj.action;
                     var segments = obj.segments;
+                    var startTime = obj.startTime;
+                    var endTime = obj.endTime;
                     if(action==0){
-                        console.log("通过:taskId="+taskId);
+                        console.log("通过:taskId="+taskId+"开始时间:"+startTime+"结束时间:"+endTime);
                     }else if(action==1||action==2){
                         /*for(var j=0;j<segments.length;j++){
                     		var segment=segments[j];
                     		var label=segment.label;
                     		var level=segment.level;
                 		}*/
-                        console.log("结果："+action==1?"不确定":"不通过"+"!taskId="+taskId);
+                        console.log("结果："+action==1?"不确定":"不通过"+"!taskId="+taskId+"开始时间:"+startTime+"结束时间:"+endTime);
                     }
                 }
             }
