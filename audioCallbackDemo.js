@@ -40,21 +40,25 @@ var responseCallback=function(responseData){
 				}else{
                     var action = obj.action;
                     var labels = obj.labels;
-                    if(action==0){
+                    if (action === 0) {
                         console.log("通过:taskId="+taskId);
-					}else if(action==1||action==2){
-                        /*for(var j=0;j<labels.length;j++){
-                    		var labelInfo=labels[j];
-                    		var label=labelInfo.label;
-                    		var level=labelInfo.level;
-                		}*/
+					} else if (action === 1 || action === 2) {
+						for(var j=0;j<labels.length;j++){
+							var labelInfo = labels[j];
+							var label = labelInfo.label;
+							var level = labelInfo.level;
+							var details = labelInfo.details;
+							var hintArr = details.hint;
+							// 二级细分类
+							var subLabels = labelInfo.subLabels;
+						}
                         console.log("结果："+action==1?"不确定":"不通过"+"!taskId="+taskId);
 					}
 				}
 			}
 		}
-	}else{
-		 console.log('ERROR:code=' + code+',msg='+msg);
+	} else {
+		console.log('ERROR:code=' + code+',msg='+msg);
 	}
 };
 utils.sendHttpRequest(apiurl,"POST",post_data,responseCallback);
