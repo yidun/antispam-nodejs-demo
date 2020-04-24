@@ -38,6 +38,11 @@ var responseCallback=function(responseData){
 		var taskId=result.taskId;
 		var action=result.action;
 		var labelArray=result.labels;
+		if (labelArray.length > 0) {
+			for (var i=0; i<labelArray.length; i++) {
+				
+			}
+		}
 		if(action==0){
 			console.log("taskId="+taskId+"，文本机器检测结果：通过")
 		}else if(action==1){
@@ -46,7 +51,7 @@ var responseCallback=function(responseData){
 			console.log("taskId="+taskId+"，文本机器检测结果：不通过，分类信息如下："+JSON.stringify(labelArray))
 		}
 	}else{
-		 console.log('ERROR:code=' + code+',msg='+msg);
+		console.log('ERROR:code=' + code+',msg='+msg);
 	}
 }
 utils.sendHttpRequest(apiurl,"POST",post_data,responseCallback);
