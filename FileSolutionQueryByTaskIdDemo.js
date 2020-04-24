@@ -4,7 +4,7 @@ var secretId="your_secret_id";
 // 产品私有密钥，服务端生成签名信息使用，请严格保管，避免泄露 
 var secretKey="your_secret_key";
 // 易盾反垃圾云服务文档解决方案结果查询获取接口地址
-var apiurl="https://as-file.dun.163yun.com/v1/file/query";
+var apiurl="http://as-file.dun.163yun.com/v1/file/query";
 
 //请求参数
 var post_data = {

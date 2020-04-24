@@ -6,7 +6,7 @@ var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配 
 var businessId="your_business_id";
 // 易盾反垃圾云服务图片检测结果获取接口地址
-var apiurl="https://as.dun.163yun.com/v4/image/callback/results";
+var apiurl="http://as.dun.163yun.com/v4/image/callback/results";
 //请求参数
 var post_data = {
 	// 1.设置公有有参数
