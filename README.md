@@ -29,5 +29,6 @@ http://dun.163.com
 ├── fileSolutionCallbakDemo.js　文档解决方案离线结果获取接口演示
 ├── videoSolutionSubmitDemo.js 点播音视频解决方案在线检测提交接口演示
 ├── videoSolutionCallbakDemo.js　点播音视频解决方案离线结果获取接口演示
-
+├── KeywordSubmitAPIDemo.js 敏感词批量提交接口演示
+├── KeywordDeleteAPIDemo.js 敏感词批量删除接口演示
 ```
