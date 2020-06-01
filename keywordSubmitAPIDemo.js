@@ -30,8 +30,8 @@ var responseCallback=function(responseData){
     var code=data.code;
     var msg=data.msg;
     if(code==200){
-        var result=data.result;
-        console.log("SUBMIT RESULT="+result);
+        var ids = data.result.ids;
+        console.log("SUBMIT RESULT="+JSON.stringify(ids));
     }else{
         console.log('ERROR:code=' + code+',msg='+msg);
     }
