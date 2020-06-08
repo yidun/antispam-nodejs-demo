@@ -6,7 +6,7 @@ var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配 
 var businessId="your_business_id";
 // 调用易盾反垃圾云服务查询直播语音片段离线结果接口API示例
-var apiurl="http://as-liveaudio.dun.163yun.com/v1/liveaudio/query/task";
+var apiurl="http://as-liveaudio.dun.163.com/v1/liveaudio/query/task";
 
 //请求参数
 var post_data = {
