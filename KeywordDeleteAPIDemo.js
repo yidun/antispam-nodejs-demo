@@ -4,7 +4,7 @@ var secretId="your_secret_id";
 // 产品私有密钥，服务端生成签名信息使用，请严格保管，避免泄露 
 var secretKey="your_secret_key";
 // 易盾反垃圾云服务敏感词批量删除接口
-var apiurl="http://as.dun.163yun.com/v1/keyword/delete";
+var apiurl="http://as.dun.163.com/v1/keyword/delete";
 
 //请求参数
 var post_data = {
