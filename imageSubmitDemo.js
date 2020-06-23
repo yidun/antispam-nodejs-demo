@@ -6,7 +6,7 @@ var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配 
 var businessId="your_business_id";
 // 易盾反垃圾云服务图片数据提交接口地址
-var apiurl="https://as.dun.163yun.com/v1/image/submit";
+var apiurl="http://as.dun.163.com/v1/image/submit";
 //请求参数
 var post_data = {
 	// 1.设置公有有参数
@@ -18,7 +18,7 @@ var post_data = {
 };
 var images=[{
     name:"image1",
-    data:"https://nos.netease.com/yidun/2-0-0-a6133509763d4d6eac881a58f1791976.jpg",
+    data:"http://nos.netease.com/yidun/2-0-0-a6133509763d4d6eac881a58f1791976.jpg",
     level:2
 }];
 post_data.images=JSON.stringify(images);

@@ -6,7 +6,7 @@ var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配
 var businessId="your_business_id";
 // 易盾反垃圾云服务音频离线结果获取接口地址
-var apiurl="https://as.dun.163yun.com/v3/audio/callback/results";
+var apiurl="http://as.dun.163.com/v3/audio/callback/results";
 
 //请求参数
 var post_data = {
@@ -40,21 +40,25 @@ var responseCallback=function(responseData){
 				}else{
                     var action = obj.action;
                     var labels = obj.labels;
-                    if(action==0){
+                    if (action === 0) {
                         console.log("通过:taskId="+taskId);
-					}else if(action==1||action==2){
-                        /*for(var j=0;j<labels.length;j++){
-                    		var labelInfo=labels[j];
-                    		var label=labelInfo.label;
-                    		var level=labelInfo.level;
-                		}*/
+					} else if (action === 1 || action === 2) {
+						for(var j=0;j<labels.length;j++){
+							var labelInfo = labels[j];
+							var label = labelInfo.label;
+							var level = labelInfo.level;
+							var details = labelInfo.details;
+							var hintArr = details.hint;
+							// 二级细分类
+							var subLabels = labelInfo.subLabels;
+						}
                         console.log("结果："+action==1?"不确定":"不通过"+"!taskId="+taskId);
 					}
 				}
 			}
 		}
-	}else{
-		 console.log('ERROR:code=' + code+',msg='+msg);
+	} else {
+		console.log('ERROR:code=' + code+',msg='+msg);
 	}
 };
 utils.sendHttpRequest(apiurl,"POST",post_data,responseCallback);

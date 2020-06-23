@@ -11,6 +11,8 @@ http://dun.163.com
 
 ```
 .
+├── crawlerSubmitAPIDemo.js 网站检测解决方案在线检测提交接口演示
+├── crawlerCallbackAPIDemo.js 网站检测解决方案检测结果获取接口演示
 ├── textCheckDemo.js 文本在线检测接口演示
 ├── textCallbakDemo.js　文本离线结果获取接口演示
 ├── imageCheckDemo.js　图片在线检测接口演示
@@ -27,5 +29,6 @@ http://dun.163.com
 ├── fileSolutionCallbakDemo.js　文档解决方案离线结果获取接口演示
 ├── videoSolutionSubmitDemo.js 点播音视频解决方案在线检测提交接口演示
 ├── videoSolutionCallbakDemo.js　点播音视频解决方案离线结果获取接口演示
-
+├── KeywordSubmitAPIDemo.js 敏感词批量提交接口演示
+├── KeywordDeleteAPIDemo.js 敏感词批量删除接口演示
 ```

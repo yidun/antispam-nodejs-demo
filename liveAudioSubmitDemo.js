@@ -6,7 +6,7 @@ var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配 
 var businessId="your_business_id";
 // 易盾反垃圾云服务直播音频信息提交接口地址
-var apiurl="https://as-liveaudio.dun.163yun.com/v1/liveaudio/check";
+var apiurl="http://as-liveaudio.dun.163.com/v1/liveaudio/check";
 //请求参数
 var post_data = {
 	// 1.设置公有有参数
@@ -35,8 +35,7 @@ var responseCallback=function(responseData){
             console.log("SUBMIT FAIL!taskId="+taskId);
         }
 	}else{
-		 console.log('ERROR:code=' + code+',msg='+msg);
+		console.log('ERROR:code=' + code+',msg='+msg);
 	}
-   
 }
 utils.sendHttpRequest(apiurl,"POST",post_data,responseCallback);
