@@ -35,7 +35,8 @@ var responseCallback=function(responseData){
                 var taskId = obj.taskId;
                 var callback = obj.callback;
                 var dataId = obj.dataId;
-                console.log("taskId:"+taskId+", callback:"+callback+", dataId:"+dataId);
+                var content = obj.content;
+                console.log("taskId:"+taskId+", callback:"+callback+", dataId:"+dataId+", content:"+content);
 
                 if (obj.hasOwnProperty("evidences")) {
                     parseMachine(obj.evidences, taskId);

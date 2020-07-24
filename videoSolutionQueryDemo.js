@@ -14,6 +14,8 @@ var post_data = {
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer()
 };
+var taskIds=["64e35e85b71043ee87f0765705138fd1"];
+post_data.taskIds=JSON.stringify(taskIds);
 var signature=utils.genSignature(secretKey,post_data);
 post_data.signature=signature;
 //http请求结果

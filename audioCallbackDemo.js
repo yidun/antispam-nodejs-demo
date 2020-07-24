@@ -54,6 +54,18 @@ var responseCallback=function(responseData){
 						}
                         console.log("结果："+action==1?"不确定":"不通过"+"!taskId="+taskId);
 					}
+					var segments = obj.segments;
+                    if (segments &&segments.length>0) {
+                        for(var j=0;j<segments.length;j++){
+                            var segment = segments[j];
+                            var startTime = segment.startTime;
+                            var endTime = segment.endTime;
+                            var content = segment.content;
+                            var label = segment.label;
+                            var level = segment.level;
+                            console.log("taskId："+taskId+"，开始时间："+startTime+"秒，结束时间："+endTime+"秒，内容："+content+"，label："+label+"，level："+level);
+                        }
+					}
 				}
 			}
 		}
