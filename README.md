@@ -23,7 +23,9 @@ http://dun.163.com
 ├── videoCallbakDemo.js　点播视频离线结果获取接口演示
 ├── liveVideoSubmitDemo.js 直播视频流信息提交接口演示
 └── liveVideoCallbackDemo.js 直播视频流检测结果获取接口演示
+└── liveVideoImageQueryDemo.js 直播视频截图查询接口接口演示
 ├── liveAudioSubmitDemo.js 直播语音流信息提交接口演示
+└── videoImageQueryDemo.js 视频点播截图查询接口演示
 └── liveAudioCallbackDemo.js 直播语音流检测结果获取接口演示
 ├── fileSolutionSubmitDemo.js 文档解决方案在线检测提交接口演示
 ├── fileSolutionCallbakDemo.js　文档解决方案离线结果获取接口演示
