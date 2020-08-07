@@ -9,7 +9,8 @@ var apiurl = 'http://as.dun.163.com/v1/videosolution/submit'
 var post_data = {
   // 1.设置公有有参数
   secretId: secretId,
-  version: 'v1',
+  // 点播音视频解决方案版本v1.1及以上语音二级细分类subLabels结构进行调整
+  version: 'v1.1',
   timestamp: new Date().getTime(),
   nonce: utils.noncer(),
   // 2.设置私有参数

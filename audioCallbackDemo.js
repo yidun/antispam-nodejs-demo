@@ -13,7 +13,8 @@ var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
 	businessId:businessId,
-	version:"v3.1",
+	// 点播语音版本v3.2及以上二级细分类结构进行调整
+	version:"v3.2",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer()
 };
@@ -47,10 +48,14 @@ var responseCallback=function(responseData){
 							var labelInfo = labels[j];
 							var label = labelInfo.label;
 							var level = labelInfo.level;
-							var details = labelInfo.details;
-							var hintArr = details.hint;
-							// 二级细分类
+							// 注意二级细分类结构
 							var subLabels = labelInfo.subLabels;
+							for(var k=0;k<subLabels.length;k++) {
+							    var subLabelObj = subLabels[k];
+							    var subLabel = subLabelObj.subLabel;
+							    var details = subLabelObj.details;
+                                var hintArr = details.hint;
+							}
 						}
                         console.log("结果："+action==1?"不确定":"不通过"+"!taskId="+taskId);
 					}

@@ -6,13 +6,14 @@ var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配 
 var businessId="your_business_id";
 // 易盾反垃圾云服务直播音频信息提交接口地址
-var apiurl="http://as-liveaudio.dun.163.com/v1/liveaudio/check";
+var apiurl="http://as-liveaudio.dun.163.com/v2/liveaudio/check";
 //请求参数
 var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
 	businessId:businessId,
-	version:"v1.1",
+	// 直播语音版本v2.1及以上二级细分类结构进行调整
+	version:"v2.1",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer(),
 	// 2.设置私有参数

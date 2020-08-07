@@ -13,7 +13,8 @@ var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
 	businessId:businessId,
-	version:"v2",
+	// 直播语音版本v2.1及以上二级细分类结构进行调整
+	version:"v2.1",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer()
 };
@@ -72,7 +73,11 @@ var parseMachine = function(evidences, taskId) {
                 var segment = segments[j];
                 var label = segment.label;
                 var level = segment.level;
-                var evidence = segment.evidence; 
+                // 注意二级细分类结构
+                var subLabels = segment.subLabels;
+                for(var k=0;k<subLabels.length;k++) {
+                    var subLabelObj = subLabels[k];
+                }
             }
             console.log("结果："+action==1?"不确定":"不通过"+"!taskId="+taskId+"开始时间:"+startTime+"结束时间:"+endTime);
         }
