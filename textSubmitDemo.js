@@ -5,7 +5,7 @@ var secretId="your_secret_id";
 var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配 
 var businessId="your_business_id";
-// 易盾反垃圾云服务文本数据提交接口地址
+// 易盾反垃圾云服务审核系统文本批量提交接口
 var apiurl="http://as.dun.163.com/v1/text/submit";
 //请求参数
 var post_data = {
