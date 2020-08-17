@@ -10,7 +10,8 @@ var apiurl="http://as.dun.163.com/v2/livewallsolution/callback/results";
 var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
-	version:"v2",
+	// 直播音视频解决方案版本v2.1及以上语音二级细分类结构进行调整
+	version:"v2.1",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer()
 };
@@ -77,7 +78,11 @@ var parseAudioEvidence = function(audioEvidence, taskId) {
                 var segment = segments[j];
                 var label = segment.label;
                 var level = segment.level;
-                var evidence = segment.evidence; 
+                // 注意二级细分类结构
+                var subLabels = segment.subLabels;
+                for(var k=0;k<subLabels.length;k++) {
+                    var subLabelObj = subLabels[k];
+                }
             }
             console.log("结果："+action==1?"不确定":"不通过"+"!taskId="+taskId+"开始时间:"+startTime+"结束时间:"+endTime);
         }
