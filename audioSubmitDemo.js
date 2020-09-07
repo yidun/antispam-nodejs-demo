@@ -13,7 +13,7 @@ var post_data = {
     secretId:secretId,
     businessId:businessId,
     // 点播语音版本v3.2及以上二级细分类结构进行调整
-    version:"v3.2",
+    version:"v3.3",
     timestamp:new Date().getTime(),
     nonce:utils.noncer(),
     // 2.设置私有参数
