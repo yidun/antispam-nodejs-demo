@@ -15,6 +15,7 @@ var post_data = {
     version:"v1",
     timestamp:new Date().getTime(),
     nonce:utils.noncer(),
+	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
     // 2.设置私有参数
     // 100: 色情，110: 性感，200: 广告，210: 二维码，300: 暴恐，400: 违禁，500: 涉政，600: 谩骂，700: 灌水
     category:"100"

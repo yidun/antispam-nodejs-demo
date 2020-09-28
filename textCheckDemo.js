@@ -15,6 +15,7 @@ var post_data = {
 	version:"v3.1",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer(),
+	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
 	// 2.设置私有参数
 	dataId:"ebfcad1c-dba1-490c-b4de-e784c2691768",
 	content:"易盾测试内容！"

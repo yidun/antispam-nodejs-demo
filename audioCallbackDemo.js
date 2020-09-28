@@ -16,7 +16,8 @@ var post_data = {
 	// 点播语音版本v3.2及以上二级细分类结构进行调整
 	version:"v3.3",
 	timestamp:new Date().getTime(),
-	nonce:utils.noncer()
+	nonce:utils.noncer(),
+	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
 };
 var signature=utils.genSignature(secretKey,post_data);
 post_data.signature=signature;

@@ -14,7 +14,8 @@ var post_data = {
 	businessId:businessId,
 	version:"v4",
 	timestamp:new Date().getTime(),
-	nonce:utils.noncer()
+	nonce:utils.noncer(),
+	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
 	// 2.1设置私有参数
 	// account:"nodejs@163.com",
 	// ip:"123.115.77.137"

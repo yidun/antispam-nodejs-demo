@@ -14,7 +14,8 @@ var post_data = {
 	businessId:businessId,
 	version:"v1",
 	timestamp:new Date().getTime(),
-	nonce:utils.noncer()
+	nonce:utils.noncer(),
+	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
 };
 var images=[{
     name:"image1",

@@ -16,7 +16,8 @@ var post_data = {
 	businessId:businessId,
 	version:"v3",
 	timestamp:new Date().getTime(),
-	nonce:utils.noncer()
+	nonce:utils.noncer(),
+	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
 };
 var taskIds=["64e35e85b71043ee87f0765705138fd1"];
 post_data.taskIds=JSON.stringify(taskIds);

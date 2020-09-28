@@ -15,6 +15,7 @@ var post_data = {
   version: 'v3',
   timestamp: new Date().getTime(),
   nonce: utils.noncer(),
+	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
   // 2.设置私有参数
   dataId: 'fbfcad1c-dba1-490c-b4d111e784c2691765',
   url: 'http://xxx.xxx.com/xxxx'

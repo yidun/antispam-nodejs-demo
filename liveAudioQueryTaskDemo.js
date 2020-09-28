@@ -18,7 +18,8 @@ var post_data = {
     startTime:1578326400000,
     endTime:1578327000000,//10min limit
 	timestamp:new Date().getTime(),
-	nonce:utils.noncer()
+	nonce:utils.noncer(),
+	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
 };
 var signature=utils.genSignature(secretKey,post_data);
 post_data.signature=signature;

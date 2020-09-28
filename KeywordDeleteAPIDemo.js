@@ -13,6 +13,7 @@ var post_data = {
 	version:"v1",
 	timestamp:new Date().getTime(),
     nonce:utils.noncer(),
+	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
     // 2.设置私有参数（逗号分隔）
     ids: "126,163"
 };

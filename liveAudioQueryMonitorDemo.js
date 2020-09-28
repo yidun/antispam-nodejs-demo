@@ -5,38 +5,46 @@ var secretId="your_secret_id";
 var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配 
 var businessId="your_business_id";
-// 易盾反垃圾云服务直播音频信息提交接口地址
-var apiurl="http://as-liveaudio.dun.163.com/v2/liveaudio/check";
+// 易盾反垃圾云服务直播音频人审操作记录查询接口地址
+var apiurl="http://as-liveaudio.dun.163.com/v1/liveaudio/query/monitor";
 //请求参数
 var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
 	businessId:businessId,
-	// 直播语音版本v2.1及以上二级细分类结构进行调整
-	version:"v2.1",
+	version:"v1.0",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer(),
 	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
 	// 2.设置私有参数
-	url:"www.xxxx.com/xxx"
+	taskId:"26b3f1b1e1a4460c9012ee45857d8349"
 };
 var signature=utils.genSignature(secretKey,post_data);
 post_data.signature=signature;
 //http请求结果
 var responseCallback=function(responseData){
 	var data = JSON.parse(responseData);
-	var code=data.code;
-	var msg=data.msg;
-	if(code==200){
-        var result=data.result;
-        var status=result.status;
-        var taskId=result.taskId;
+	var code = data.code;
+	var msg = data.msg;
+	if(code == 200){
+        var result = data.result;
+        var status = result.status;
         if (status == 0) {
-            console.log("SUBMIT SUCCESS!taskId="+taskId);
-        } else {
-            console.log("SUBMIT FAIL!taskId="+taskId);
-        }
-	}else{
+			var monitors = result.monitors;
+			for (var i = 0; i < monitors.length; i++) {
+				var monitor = monitors[i];
+				var action = monitor.action;
+				var actionTime = monitor.actionTime;
+				var spamType = monitor.spamType;
+				var spamDetail = monitor.spamDetail;
+			}
+            console.log("monitors: " + JSON.stringify(monitors));
+        } else if (status == 20) {
+            console.log("data is expired");
+        } else if (status == 30) {
+			console.log("data is not exist");
+		}
+	} else{
 		console.log('ERROR:code=' + code+',msg='+msg);
 	}
 }

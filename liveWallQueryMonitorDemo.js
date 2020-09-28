@@ -6,22 +6,19 @@ var secretId="your_secret_id";
 var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配 
 var businessId="your_business_id";
-// 易盾反垃圾云服务直播电视墙流信息提交接口地址
-var apiurl="http://as.dun.163.com/v2/livevideo/submit";
+// 易盾反垃圾云服务直播电视墙人审操作查询接口地址
+var apiurl="https://as.dun.163.com/v1/livewall/query/monitor";
 //请求参数
 var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
 	businessId:businessId,
-	version:"v2",
+	version:"v1",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer(),
 	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
 	// 2.设置私有参数
-	dataId:"myid",
-	url:"www.xxxx.com/xxx"
-	// callback:"mycallback",
-	// scFrequency:5
+	taskId:"26b3f1b1e1a4460c9012ee45857d8349"
 };
 var signature=utils.genSignature(secretKey,post_data);
 post_data.signature=signature;
@@ -30,16 +27,26 @@ var responseCallback=function(responseData){
 	var data = JSON.parse(responseData);
 	var code=data.code;
 	var msg=data.msg;
-	if(code==200){
-		var result=data.result;
-		if(result){
-			console.log("推送成功");
-		}else{
-			console.log("推送失败");
+	if(code == 200){
+        var result = data.result;
+        var status = result.status;
+        if (status == 0) {
+			var records = result.records;
+			for (var i = 0; i < records.length; i++) {
+				var record = records[i];
+				var action = record.action;
+				var actionTime = record.actionTime;
+				var label = record.label;
+				var detail = record.detail;
+			}
+            console.log("records: " + JSON.stringify(records));
+        } else if (status == 20) {
+            console.log("data is expired");
+        } else if (status == 30) {
+			console.log("data is not exist");
 		}
-	}else{
-		 console.log('ERROR:code=' + code+',msg='+msg);
+	} else{
+		console.log('ERROR:code=' + code+',msg='+msg);
 	}
-   
 }
 utils.sendHttpRequest(apiurl,"POST",post_data,responseCallback);

@@ -14,7 +14,8 @@ var post_data = {
 	businessId:businessId,
 	version:"v1",
 	timestamp:new Date().getTime(),
-	nonce:utils.noncer()
+	nonce:utils.noncer(),
+	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
 };
 var texts=[{
     dataId:"ebfcad1c-dba1-490c-b4de-e784c2691768",

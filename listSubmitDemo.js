@@ -12,6 +12,7 @@ var post_data = {
     version:"v1",
     timestamp:new Date().getTime(),
     nonce:utils.noncer(),
+	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
     // 2.设置私有参数
     // 1: 白名单，2: 黑名单，4: 必审名单，8: 预审名单
     listType:2,
