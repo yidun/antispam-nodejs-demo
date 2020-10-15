@@ -13,7 +13,8 @@ var post_data = {
 	// 直播音视频解决方案版本v2.1及以上语音二级细分类结构进行调整
 	version:"v2.1",
 	timestamp:new Date().getTime(),
-	nonce:utils.noncer()
+	nonce:utils.noncer(),
+	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
 };
 var signature=utils.genSignature(secretKey,post_data);
 post_data.signature=signature;

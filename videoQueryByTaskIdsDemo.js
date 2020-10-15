@@ -14,7 +14,8 @@ var post_data = {
   businessId: businessId,
   version: 'v1',
   timestamp: new Date().getTime(),
-  nonce: utils.noncer()
+  nonce: utils.noncer(),
+	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
 }
 // 设置私有参数
 var taskIds = ['3898f9e189404ea98fb20e77d11b69e3', '3f343b8947a24a6987cba8ef5ea6534f']

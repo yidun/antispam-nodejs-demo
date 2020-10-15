@@ -16,6 +16,7 @@ var post_data = {
 	version:"v1",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer(),
+	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
 	// 2.设置私有参数
 	taskId:"87aa24884d614ae8b8cc4d472b37be51",
 	levels:"[0,1,2]",
