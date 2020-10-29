@@ -38,12 +38,12 @@ var responseCallback=function(responseData){
         for (var i=0;i<result.length;i++) {
             var item=result[i];
             var taskId=item.taskId;
-            var status=item.status;
-            if (status==0) {
+            var r=item.result;
+            if (r==0) {
                 console.log("SUCCESS, taskId="+taskId);
-            } else if (status==2) {
+            } else if (r==2) {
                 console.log("NOT EXISTS, taskId="+taskId);
-            } else if (status==1) {
+            } else if (r==1) {
                 console.log("SERVER ERROR, taskId="+taskId);
             }
         }
