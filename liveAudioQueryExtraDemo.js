@@ -5,8 +5,8 @@ var secretId="your_secret_id";
 var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配 
 var businessId="your_business_id";
-// 易盾反垃圾云服务直播音频人审操作记录查询接口地址
-var apiurl="http://as.dun.163.com/v1/liveaudio/query/monitor";
+// 易盾反垃圾云服务直播音频增值检测结果查询接口地址
+var apiurl="http://as.dun.163.com/v1/liveaudio/query/extra";
 //请求参数
 var post_data = {
 	// 1.设置公有有参数
@@ -17,7 +17,7 @@ var post_data = {
 	nonce:utils.noncer(),
 	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
 	// 2.设置私有参数
-	taskId:"26b3f1b1e1a4460c9012ee45857d8349"
+	taskId:"xxx"
 };
 var signature=utils.genSignature(secretKey,post_data);
 post_data.signature=signature;
@@ -28,22 +28,17 @@ var responseCallback=function(responseData){
 	var msg = data.msg;
 	if(code == 200){
         var result = data.result;
-        var status = result.status;
-        if (status == 0) {
-			var monitors = result.monitors;
-			for (var i = 0; i < monitors.length; i++) {
-				var monitor = monitors[i];
-				var action = monitor.action;
-				var actionTime = monitor.actionTime;
-				var spamType = monitor.spamType;
-				var spamDetail = monitor.spamDetail;
-			}
-            console.log("monitors: " + JSON.stringify(monitors));
-        } else if (status == 20) {
-            console.log("data is expired");
-        } else if (status == 30) {
-			console.log("data is not exist");
-		}
+        var asr = result.asr;
+        if (asr != null && asr.length > 0) {
+           for(var i=0;i<asr.length;i++){
+                var obj = asr[i];
+                var taskId = obj.taskId;
+                var content = obj.content;
+                var startTime = obj.startTime;
+                var endTime = obj.endTime;
+                console.log("taskId:"+taskId+", content:"+content+", startTime:"+startTime+", endTime:"+endTime);
+            }
+        }
 	} else{
 		console.log('ERROR:code=' + code+',msg='+msg);
 	}
