@@ -6,7 +6,7 @@ var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配 
 var businessId="your_business_id";
 // 易盾反垃圾云服务直播音频离线结果获取接口地址
-var apiurl="http://as-liveaudio.dun.163.com/v2/liveaudio/callback/results";
+var apiurl="http://as.dun.163.com/v3/liveaudio/callback/results";
 
 //请求参数
 var post_data = {
@@ -14,7 +14,7 @@ var post_data = {
 	secretId:secretId,
 	businessId:businessId,
 	// 直播语音版本v2.1及以上二级细分类结构进行调整
-	version:"v2.1",
+	version:"v3",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer(),
 	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
@@ -29,11 +29,13 @@ var responseCallback=function(responseData){
 	var msg=data.msg;
 	if (code === 200) {
         var result = data.result;
-        if (result.length === 0) {
+        // 解析反垃圾检测结果
+        var antispam = result.antispam;
+        if (antispam.length === 0) {
             console.log("暂时没有结果需要获取，请稍后重试！");
         } else {
-            for(var i=0;i<result.length;i++){
-                var obj = result[i];
+            for(var i=0;i<antispam.length;i++){
+                var obj = antispam[i];
                 var taskId = obj.taskId;
                 var callback = obj.callback;
                 var dataId = obj.dataId;
@@ -48,6 +50,20 @@ var responseCallback=function(responseData){
                 }
             }
         }
+         // 解析语音识别检测结果
+         var asr = result.asr;
+         if (asr.length === 0) {
+             console.log("暂时没有结果需要获取，请稍后重试！");
+         } else {
+             for(var i=0;i<asr.length;i++){
+                 var obj = asr[i];
+                 var taskId = obj.taskId;
+                 var content = obj.content;
+                 var startTime = obj.startTime;
+                 var endTime = obj.endTime;
+                 console.log("taskId:"+taskId+", content:"+content+", startTime:"+startTime+", endTime:"+endTime);
+             }
+         }
 	} else {
 		console.log('ERROR:code=' + code+',msg='+msg);
 	}
