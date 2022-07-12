@@ -4,7 +4,7 @@ var secretId="your_secret_id";
 // 产品私有密钥，服务端生成签名信息使用，请严格保管，避免泄露
 var secretKey="your_secret_key";
 // 易盾反垃圾云服务融媒体解决方案离线结果获取接口地址
-var apiurl="http://as.dun.163.com/v2/mediasolution/callback/results";
+var apiurl="http://as.dun.163.com/v2/mediasolution/callback/query";
 
 //请求参数
 var post_data = {
@@ -15,6 +15,8 @@ var post_data = {
 	nonce:utils.noncer(),
 	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
 };
+var taskIds=["esulf8ytd9l2qr3zfawhnoxg05009va2","7z72t7do7qyrq7n46tzhpxig00609v9h"];
+post_data.taskIds=JSON.stringify(taskIds);
 var signature=utils.genSignature(secretKey,post_data);
 post_data.signature=signature;
 //http请求结果
@@ -40,7 +42,7 @@ var responseCallback=function(responseData){
                 var checkStatus = antispam.checkStatus;
                 var evidences = antispam.evidences;
                 var evidencesStr=evidences!=null?JSON.stringify(evidences):"";
-                console.log("CALLBACK SUCCESS!taskId="+taskId+",建议动作="+suggestion+",检测状态="+checkStatus
+                console.log("QUERY SUCCESS!taskId="+taskId+",建议动作="+suggestion+",检测状态="+checkStatus
                     +",机审证据信息="+evidencesStr+",增值服务信息="+valueAddServiceStr+",反作弊检测结果="+anticheatStr);
 			}
 		}

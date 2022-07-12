@@ -6,24 +6,24 @@ var secretKey="your_secret_key";
 // 业务ID，易盾根据产品业务特点分配
 var businessId="your_business_id";
 // 易盾反垃圾云服务音频信息提交接口地址
-var apiurl="http://as.dun.163.com/v3/audio/submit";
+var apiurl="http://as.dun.163.com/v4/audio/submit";
 //请求参数
 var post_data = {
     // 1.设置公有有参数
     secretId:secretId,
     businessId:businessId,
-    // 点播语音版本v3.2及以上二级细分类结构进行调整
-    version:"v3.3",
+    version:"v4",
     timestamp:new Date().getTime(),
     nonce:utils.noncer(),
 	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
     // 2.设置私有参数
-    url:"xxx"
+    url:"http://xxx"
 };
 var signature=utils.genSignature(secretKey,post_data);
 post_data.signature=signature;
 //http请求结果
 var responseCallback=function(responseData){
+    console.log("responseData="+responseData);
     var data = JSON.parse(responseData);
     var code=data.code;
     var msg=data.msg;

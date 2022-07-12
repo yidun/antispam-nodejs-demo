@@ -4,13 +4,13 @@ var secretId="your_secret_id";
 // 产品私有密钥，服务端生成签名信息使用，请严格保管，避免泄露 
 var secretKey="your_secret_key";
 // 易盾反垃圾云服务网站检测结果获取接口地址
-var apiurl="http://as.dun.163.com/v1/crawler/submit";
+var apiurl="http://as.dun.163.com/v3/crawler/submit";
 
 //请求参数
 var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
-	version:"v1.0",
+	version:"v3",
 	timestamp:new Date().getTime(),
     nonce:utils.noncer(),
 	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256

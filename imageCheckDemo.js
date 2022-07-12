@@ -1,18 +1,18 @@
 ﻿var utils=require("./utils");
-//产品密钥ID，产品标识 
+//产品密钥ID，产品标识
 var secretId="your_secret_id";
-// 产品私有密钥，服务端生成签名信息使用，请严格保管，避免泄露 
+// 产品私有密钥，服务端生成签名信息使用，请严格保管，避免泄露
 var secretKey="your_secret_key";
-// 业务ID，易盾根据产品业务特点分配 
+// 业务ID，易盾根据产品业务特点分配
 var businessId="your_business_id";
 // 易盾反垃圾云服务图片在线检测接口地址 
-var apiurl="http://as.dun.163.com/v4/image/check";
+var apiurl="http://as.dun.163.com/v5/image/check";
 //请求参数
 var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
 	businessId:businessId,
-	version:"v4",
+	version:"v5",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer(),
 	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
@@ -40,16 +40,17 @@ var responseCallback=function(responseData){
 	var msg=data.msg;
 	if(code==200){
 		// 反垃圾检测结果
-		var antispamArray=data.antispam;
-		for(var i=0;i<antispamArray.length;i++){
-			var obj=antispamArray[i];
+		var result=data.result;
+		for(var i=0;i<result.length;i++){
+			var obj=result[i];
+			var name=obj.name;
 			var name=obj.name;
 			var taskId=obj.taskId;
 			var status=obj.status;
 			var labelsArray=obj.labels;
-			if(status==0){
-                var action=obj.action;
-                console.log("taskId="+taskId+"，status="+status+"，name="+name+"，action="+action);
+			if(status==2){
+                var suggestion=obj.suggestion;
+                console.log("taskId="+taskId+"，status="+status+"，name="+name+"，suggestion="+suggestion);
                 // 产品需根据自身需求，自行解析处理，本示例只是简单判断分类级别
                 for(var k=0;k<labelsArray.length;k++){
                     var labelObj=labelsArray[k];
@@ -60,7 +61,7 @@ var responseCallback=function(responseData){
                     var subLabels=labelObj.subLabels;
                     console.log("lable:"+label+",level:"+level+",rate:"+rate);
                 }
-                switch (action) {
+                switch (suggestion) {
                     case 0:
                         console.log("#图片机器检测结果：最高等级为\"正常\"\n");
                         break;
@@ -76,23 +77,22 @@ var responseCallback=function(responseData){
 			}else{
                 console.log("检测失败");
 			}
+            // ocr结果
+            var ocr=result.ocr;
+            var ocrStr=ocr!=null?JSON.stringify(ocr):"";
+            var face=result.face;
+            var faceStr=face!=null?JSON.stringify(face):"";
+            var quality=result.quality;
+            var qualityStr=quality!=null?JSON.stringify(quality):"";
+            var logo=result.logo;
+            var logoStr=logo!=null?JSON.stringify(logo):"";
+            var discern=result.discern;
+            var discernStr=discern!=null?JSON.stringify(discern):"";
+            var userRisk=result.userRisk;
+            var userRiskStr=userRisk!=null?JSON.stringify(userRisk):"";
+            console.log("OCR结果信息:"+ocrStr+",人脸检测信息:"+faceStr+",质量检测结果:"+qualityStr+",logo检测结果:"+logoStr
+                +",图片识别结果:"+discernStr+",图片用户画像检测结果:"+userRiskStr);
 		}
-		// ocr结果
-        var ocrArray=data.ocr;
-        for(var i=0;i<ocrArray.length;i++){
-            var obj=ocrArray[i];
-            var name=obj.name;
-            var taskId=obj.taskId;
-            var detailsArray=obj.details;
-            console.log("taskId="+taskId+"，name="+name);
-            for(var k=0;k<detailsArray.length;k++){
-                var detail=detailsArray[k];
-                var content=detail.content;
-                // lineContents为ocr片段及坐标信息，根据需要解析
-                var lineContents=detail.lineContents;
-                console.log("识别ocr文本内容:"+content);
-            }
-        }
 	}else{
 		 console.log('ERROR:code=' + code+',msg='+msg);
 	}
