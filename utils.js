@@ -8,7 +8,7 @@ var http = require('http');
 var urlutil=require('url');
 var querystring = require('querystring');
 var crypto = require('crypto');
-var sm3 = require("sm3");
+//var sm3 = require("sm3");
 //产生随机整数--工具方法
 var noncer=function(){
 	var range=function(start,end){
@@ -51,7 +51,7 @@ var genSignature=function(secretKey,paramsJson){
 		case "sha256":
 			return crypto.createHash(signatureMethod).update(needSignatureStr, "utf-8").digest("hex");
 		case "sm3":
-			return sm3(needSignatureStr);
+			//return sm3(needSignatureStr);
 		default:
 			console.log("[ERROR] 签名方法不支持");
 			return null;

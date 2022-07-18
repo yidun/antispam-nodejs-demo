@@ -1,15 +1,15 @@
 ﻿var utils = require('./utils')
 // 产品密钥ID，产品标识
-var secretId = 'your_secret_id'
+var secretId="your_secret_id";
 // 产品私有密钥，服务端生成签名信息使用，请严格保管，避免泄露
-var secretKey = 'your_secret_key'
+var secretKey="your_secret_key";
 // 易盾反垃圾云服务融媒体解决方案信息提交接口地址
-var apiurl = 'http://as.dun.163.com/v1/mediasolution/submit'
+var apiurl = 'http://as.dun.163.com/v2/mediasolution/submit'
 // 请求参数
 var post_data = {
   // 1.设置公有有参数
   secretId: secretId,
-  version: 'v1',
+  version: 'v2',
   timestamp: new Date().getTime(),
   nonce: utils.noncer(),
 	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
@@ -59,9 +59,9 @@ var responseCallback = function (responseData) {
   var msg = data.msg;
   if (code == 200) {
     var obj = data.result;
-    var dataId = obj.dataId;
-    var taskId = obj.taskId;
-    console.log("SUBMIT SUCCESS!taskId="+taskId+",dataId="+dataId);
+    var antispam = obj.antispam;
+    var taskId = antispam.taskId;
+    console.log("SUBMIT SUCCESS!taskId="+taskId);
   } else {
     console.log('ERROR:code=' + code + ',msg=' + msg)
   }

@@ -1,18 +1,18 @@
 ﻿var utils=require("./utils");
 //产品密钥ID，产品标识 
 var secretId="your_secret_id";
-// 产品私有密钥，服务端生成签名信息使用，请严格保管，避免泄露 
+// 产品私有密钥，服务端生成签名信息使用，请严格保管，避免泄露
 var secretKey="your_secret_key";
-// 业务ID，易盾根据产品业务特点分配 
+// 业务ID，易盾根据产品业务特点分配
 var businessId="your_business_id";
 // 易盾反垃圾云服务文本在线检测接口地址 
-var apiurl="http://as.dun.163.com/v3/text/check";
+var apiurl="http://as.dun.163.com/v5/text/check";
 //请求参数
 var post_data = {
 	// 1.设置公有有参数
 	secretId:secretId,
 	businessId:businessId,
-	version:"v3.1",
+	version:"v5",
 	timestamp:new Date().getTime(),
 	nonce:utils.noncer(),
 	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
@@ -36,21 +36,27 @@ var responseCallback=function(responseData){
 	var msg=data.msg;
 	if(code==200){
 		var result=data.result;
-		var taskId=result.taskId;
-		var action=result.action;
-		var labelArray=result.labels;
-		if (labelArray.length > 0) {
-			for (var i=0; i<labelArray.length; i++) {
-				
-			}
-		}
-		if(action==0){
+		var antispam=result.antispam;
+		var taskId=antispam.taskId;
+		var suggestion=antispam.suggestion;
+		var labelArray=antispam.labels;
+		if(suggestion==0){
 			console.log("taskId="+taskId+"，文本机器检测结果：通过")
-		}else if(action==1){
+		}else if(suggestion==1){
 			console.log("taskId="+taskId+"，文本机器检测结果：嫌疑，需人工复审，分类信息如下："+JSON.stringify(labelArray))
-		}else if(action==2){
+		}else if(suggestion==2){
 			console.log("taskId="+taskId+"，文本机器检测结果：不通过，分类信息如下："+JSON.stringify(labelArray))
 		}
+		var emotionAnalysis=result.emotionAnalysis;
+		var emotionAnalysisStr=emotionAnalysis!=null?JSON.stringify(emotionAnalysis):"";
+		var anticheat=result.anticheat;
+        var anticheatStr=anticheat!=null?JSON.stringify(anticheat):"";
+        var userRisk=result.userRisk;
+        var userRiskStr=userRisk!=null?JSON.stringify(userRisk):"";
+        var language=result.language;
+        var languageStr=language!=null?JSON.stringify(language):"";
+        console.log("taskId="+taskId+"，文本机器检测结果：通过"+"，情感分析检测结果："+emotionAnalysisStr
+            +"，反作弊检测结果："+anticheatStr+"，用户画像检测结果："+userRiskStr+"，语种检测结果："+languageStr)
 	}else{
 		console.log('ERROR:code=' + code+',msg='+msg);
 	}
