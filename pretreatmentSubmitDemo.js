@@ -3,8 +3,9 @@
 var secretId="your_secret_id";
 // 产品私有密钥，服务端生成签名信息使用，请严格保管，避免泄露
 var secretKey="your_secret_key";
+
 // 调用易盾反垃圾云服务名单批量提交接口API示例
-var apiurl="https://as.dun.163yun.com/v2/list/submit";
+var apiurl="http://as.dun.163.com/v2/pretreatment/add";
 //请求参数
 var post_data = {
     // 1.设置公有有参数
@@ -14,17 +15,13 @@ var post_data = {
     timestamp:new Date().getTime(),
     nonce:utils.noncer(),
 	signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
-    // 2.设置私有参数
-    // 1: 白名单，2: 黑名单，4: 必审名单，8: 预审名单
-    listType:2,
-    // 1: 用户名单，2: IP名单
-    entityType:1
 };
-var desc = "名单描述"
+// 2.设置私有参数
+var desc = "忽略词描述"
 var entities = []
-entities.push("用户黑名单1")
-entities.push("用户黑名单2")
-post_data.entities=JSON.stringify(entities);
+entities.push("忽略1")
+entities.push("忽略2")
+post_data.entitys=(entities.join(","));
 post_data.description=desc;
 var signature=utils.genSignature(secretKey,post_data);
 post_data.signature=signature;
@@ -34,10 +31,10 @@ var responseCallback=function(responseData){
     var code=data.code;
     var msg=data.msg;
     if(code==200){
-        var results=data.result;
-        for (const result of results) {
-            console.log("SUBMIT LIST ="+JSON.stringify(result));            
-        }
+        var result=data.result;
+        var pretreatmentAddResult = result.pretreatmentAddResult;
+        var entityMap = result.entityMap;
+        console.log('addResult=' + pretreatmentAddResult + ", entity=" + JSON.stringify(entityMap))
     }else{
         console.log('ERROR:code=' + code+',msg='+msg);
     }
