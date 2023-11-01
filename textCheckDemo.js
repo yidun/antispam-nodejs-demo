@@ -55,7 +55,7 @@ var responseCallback=function(responseData){
         var userRiskStr=userRisk!=null?JSON.stringify(userRisk):"";
         var language=result.language;
         var languageStr=language!=null?JSON.stringify(language):"";
-        console.log("taskId="+taskId+"，文本机器检测结果：通过"+"，情感分析检测结果："+emotionAnalysisStr
+        console.log("taskId="+taskId+"，文本机器检测结果："+ suggestion + "，情感分析检测结果："+emotionAnalysisStr
             +"，反作弊检测结果："+anticheatStr+"，用户画像检测结果："+userRiskStr+"，语种检测结果："+languageStr)
 	}else{
 		console.log('ERROR:code=' + code+',msg='+msg);
