@@ -47,4 +47,6 @@ http://dun.163.com
 ├── liveVideoSolutionQueryImageDemo.js　直播音视频解决方案直播视频截图查询接口演示
 ├── KeywordSubmitAPIDemo.js 敏感词批量提交接口演示
 ├── KeywordDeleteAPIDemo.js 敏感词批量删除接口演示
+├── AigcStreamCallbackAPIDemo.js AIGC流式检测结果获取接口演示
+├── AigcStreamPushAPIDemo.js AIGC流式检测提交接口演示
 ```
