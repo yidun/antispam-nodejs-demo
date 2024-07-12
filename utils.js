@@ -5,6 +5,8 @@
  * 3:sendHttpRequest 发送http请求
  */
 var http = require('http');
+// 请求连接池配置
+var agent = new http.Agent({keepAlive: true})
 var urlutil=require('url');
 var querystring = require('querystring');
 var crypto = require('crypto');
@@ -68,6 +70,7 @@ var sendHttpRequest=function(url,type,data,callback){
 			hostname: host,
 			port: port,
 			path: path,
+			agent: agent,
 			method: type,
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',

@@ -16,7 +16,7 @@ var post_data1 = {
     signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
 
     // 2.设置业务参数
-    sessionId = "yourSessionId" + Date.now(),
+    sessionId : "yourSessionId" + Date.now(),
     type: "2",
     dataId: "yourDataId",
     content: "当前会话输入的内容",
@@ -33,7 +33,7 @@ var post_data2 = {
     signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
 
     // 2.设置业务参数
-    sessionId = "yourSessionId" + Date.now(),
+    sessionId : "yourSessionId" + Date.now(),
     type: "1",
     dataId: "yourDataId",
     content: "当前输出片段1",
@@ -50,13 +50,13 @@ var post_data3 = {
     signatureMethod:"MD5", // MD5, SM3, SHA1, SHA256
 
     // 2.设置业务参数
-    sessionId = "yourSessionId" + Date.now(),
+    sessionId : "yourSessionId" + Date.now(),
     type: "3",
     dataId: "yourDataId",
 };
 
-var signature = utils.genSignature(secretKey, post_data);
-post_data.signature = signature;
+var signature = utils.genSignature(secretKey, post_data1);
+post_data1.signature = signature;
 
 // http请求结果
 var responseCallback = function (responseData) {
