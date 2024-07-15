@@ -5,6 +5,8 @@ var secretId="your_secret_id";
 var secretKey="your_secret_key";
 // 调用易盾反垃圾云服务名单批量提交接口API示例
 var apiurl="https://as.dun.163yun.com/v2/list/submit";
+// 业务ID，易盾根据产品业务特点分配
+var businessId="your_business_id";
 //请求参数
 var post_data = {
     // 1.设置公有有参数

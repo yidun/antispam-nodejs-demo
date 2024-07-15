@@ -55,4 +55,4 @@ var responseCallback=function(responseData){
 		console.log('ERROR:code=' + code+',msg='+msg);
 	}
 }
-utils.sendHttpRequest(apiurl,"POST",post_data,responseQuery);
+utils.sendHttpRequest(apiurl,"POST",post_data,responseCallback);
