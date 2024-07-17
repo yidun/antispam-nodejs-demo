@@ -3,6 +3,7 @@
 var secretId="your_secret_id";
 // 产品私有密钥，服务端生成签名信息使用，请严格保管，避免泄露
 var secretKey="your_secret_key";
+var businessId="your_business_id"
 
 // 调用易盾反垃圾云服务名单批量提交接口API示例
 var apiurl="http://as.dun.163.com/v2/pretreatment/add";
